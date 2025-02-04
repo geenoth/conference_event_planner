@@ -1,43 +1,39 @@
-import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
-import viteLogo from '/vite.svg'
-import './app.css'
+import React, { useState } from "react";
+import "./App.css";
+import ConferenceEvent from "./ConferenceEvent";
+import AboutUs from "./AboutUs";
 
-export function App() {
-  const [count, setCount] = useState(0)
+function App() {
+  const [showVenue, setShowVenue] = useState(false);
+
+  const handleGetStarted = () => {
+    setShowVenue(true);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
+      <header className="first_page">
+        <div className="main_event">
+          <div className="first_page_name_btn">
+            <h1 className="budget_heading">Conference Expense Planner</h1>
+            <p className="budget_sentence"> Plan your next major event with us!</p>
+            <div className="getstarted_btn">
+              <button onClick={() => handleGetStarted()} className="get-started-btn">
+                Get Started
+              </button>
+            </div>
+          </div>
+          <div className="aboutus_main">
+            <AboutUs />
+          </div>
+        </div>
+      </header>
+
+      <div className={`event-list-container ${showVenue ? 'visible' : ''}`}>
+        <ConferenceEvent />
       </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p>
-        Check out{' '}
-        <a
-          href="https://preactjs.com/guide/v10/getting-started#create-a-vite-powered-preact-app"
-          target="_blank"
-        >
-          create-preact
-        </a>
-        , the official Preact + Vite starter
-      </p>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
     </>
-  )
+  );
 }
+
+export default App;
