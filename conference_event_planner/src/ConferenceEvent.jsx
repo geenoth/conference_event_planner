@@ -53,15 +53,71 @@ const ConferenceEvent = () => {
       }
   };
 
-    const getItemsFromTotalCost = () => {
-        const items = [];
-    };
+  const getItemsFromTotalCost = () => {
+    const items = [];
+    venueItems.forEach((item) => {
+      if (item.quantity > 0) {
+        items.push({ ...item, type: "venue" });
+      }
+    });
+    avItems.forEach((item) => {
+      if (
+        item.quantity > 0 &&
+        !items.some((i) => i.name === item.name && i.type === "av")
+      ) {
+        items.push({ ...item, type: "av" });
+      }
+    });
+    mealsItems.forEach((item) => {
+      if (item.selected) {
+        const itemForDisplay = { ...item, type: "meals" };
+        if (item.numberOfPeople) {
+          itemForDisplay.numberOfPeople = numberOfPeople;
+        }
+        items.push(itemForDisplay);
+      }
+    });
+    return items;
+  };
 
     const items = getItemsFromTotalCost();
 
     const ItemsDisplay = ({ items }) => {
+      console.log(items);
+      return <>
+          <div className="display_box1">
+              {items.length === 0 && <p>No items selected</p>}
+              <table className="table_item_data">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Unit Cost</th>
+                          <th>Quantity</th>
+                          <th>Subtotal</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {items.map((item, index) => (
+                          <tr key={index}>
+                              <td>{item.name}</td>
+                              <td>${item.cost}.00</td>
+                              <td>
+                                  {item.type === "meals" || item.numberOfPeople
+                                  ? ` For ${numberOfPeople} people`
+                                  : item.quantity}
+                              </td>
+                              <td>{item.type === "meals" || item.numberOfPeople
+                                  ? `$ ${item.cost * numberOfPeople}.00`
+                                  : `$ ${item.cost * item.quantity}.00`}
+                              </td>
+                          </tr>
+                      ))}
+                  </tbody>
+              </table>
+          </div>
+      </>
+  };
 
-    };
     const calculateTotalCost = (section) => {
       let totalCost = 0;
       if (section === "venue") {
@@ -96,10 +152,16 @@ const ConferenceEvent = () => {
         }
       }
 
+      const totalCosts = {
+        venue: venueTotalCost,
+        av: avTotalCost,
+        meals: mealsTotalCost,
+    };
+
     return (
         <>
             <navbar className="navbar_event_conference">
-                <div className="company_logo">Conference Expense Planner</div>
+                <div><img src="/public/SmartSpend.png" alt="SmartSpend logo" className="header-logo" /> </div>
                 <div className="left_navbar">
                     <div className="nav_links"> 
                         <a href="#venue" onClick={() => navigateToProducts("#venue")} >Venue</a>
@@ -176,7 +238,7 @@ const ConferenceEvent = () => {
             </div>
           ))}
         </div>
-        <div className="total_cost">Total Cost: ${venueTotalCost}</div>
+        <div className="total_cost">Total Cost: $ {venueTotalCost}.00</div>
       </div>
 
                             {/*Necessary Add-ons*/}
@@ -207,7 +269,7 @@ const ConferenceEvent = () => {
 
 
                                 </div>
-                                <div className="total_cost">Total Cost: {avTotalCost}</div>
+                                <div className="total_cost">Total Cost: $ {avTotalCost}.00</div>
 
                             </div>
 
@@ -241,7 +303,7 @@ const ConferenceEvent = () => {
                                       </div>
                                   ))}
                                 </div>
-                                <div className="total_cost">Total Cost: {mealsTotalCost}</div>
+                                <div className="total_cost">Total Cost: $ {mealsTotalCost}.00</div>
 
 
                             </div>

@@ -13,8 +13,12 @@ function App() {
   return (
     <>
       <header className="first_page">
+      {/* <img src="/public/bg_image.jpg" alt="bg Image" className="first_page" /> */}
         <div className="main_event">
           <div className="first_page_name_btn">
+             
+             <img src="/public/SmartSpend.png" alt="SmartSpend logo" className="smartspend-logo" />
+
             <h1 className="budget_heading">Conference Expense Planner</h1>
             <p className="budget_sentence"> Plan your next major event with us!</p>
             <div className="getstarted_btn">
