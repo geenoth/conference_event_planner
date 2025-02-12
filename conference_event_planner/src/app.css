@@ -4,19 +4,27 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .first_page {
   display: flex;
+  flex-direction: column;
   height: 100vh;
-  background-image: url("https://cdn.pixabay.com/photo/2018/07/05/14/45/conference-3518465_1280.jpg");
+  background-image: url(/public/bg_image.jpg);
   background-size: cover;
   background-position: center;
   justify-content: center;
   align-items: center;
   color: white;
-  overflow: hidden; 
+  overflow: hidden;
   background-color: rgb(185, 186, 187);
-  /* position: relative; */
+  position: relative;
 }
+
 
 .first_page::before {
   content: "";
@@ -31,11 +39,11 @@
 .first_page h1 {
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 .get-started-btn {
-  background-color:#EFC16B;
-  /* color: white; */
+  background-color: #EFC16B;
   color: black;
   border: none;
   padding: 20px 40px;
@@ -55,20 +63,19 @@
 
 .main_event {
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(7px);
-  gap: 100px;
+  gap: 50px;
   background-color: rgba(51, 61, 80, 0.7);
 }
 
 .aboutus_main {
   width: 800px;
   color: white;
-  /* background-color: rgba(0,0,0,0.1); */
-
 }
 
 .aboutus_container {
@@ -76,14 +83,13 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  text-align: justify;
+  text-align: center;
 }
 
 .aboutus_container p {
   font-size: 23px;
   font-weight: 700;
-  
-
+  text-align: justify;
 }
 
 .first_page_name_btn {
@@ -102,6 +108,7 @@
 
 .first_page_name_btn p {
   font-size: 26px;
+  text-align: center;
 }
 
 .event-list-container {
@@ -124,8 +131,23 @@
 
 .budget_heading {
   font-size: 40px;
+  text-align: center;
 }
 
 .budget_sentence {
   font-size: 29px;
+  text-align: center;
+}
+
+.smartspend-logo {
+  width: 500px;
+  height: auto;
+  margin-right: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.first_page .smartspend-logo {
+  width: 500px;
 }
